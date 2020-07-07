@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <!-- GOOGLE MAP -->
+  <div class="col-sm" style="padding:0px; margin:0px;">
+    <div id="map"></div>
+  </div>
+
+<script>
+
+  setTimeout(initMap(39, -98, 4), 1000);
+
+  var map;
+  var infoWindow;
+
+  function initMap(lat, lng, zoom) {
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: zoom,
+      center: {
+        lat: lat,
+        lng: lng
+      },
+      mapTypeId: 'terrain'
+    });
+
+    var contentString = `
+        <div  class="text-center " style="margin:0; width:250px; height:100px;">
+           <p class="emissions" style="font-size:20px; margin-bottom:10;">Your communities emissions: </p>
+           <h3 style="font-size:20px; display:inline-block;">${numberWithCommas(Math.round(ttlEmissions))}</h3>
+           <h3 style="font-size:16px; display:inline-block;">Tons/Kg</h3>
+         </div>`
+
+
+    if (showPoint) {
+      for (let x in latArr) {
+        var uluru = {
+          lat: latArr[x],
+          lng: longArr[x]
+        };
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+          title: 'Uluru (Ayers Rock)'
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+        let r = 0;
+        if (zoom == 4) {
+
+          r = 113600
+        } else {
+          r = 7000
+        }
+
+        var circle = new google.maps.Circle({
+          map: map,
+          radius: r, // 10 miles in metres
+          fillColor: '#2874A6',
+          fillOpacity: .5,
+          strokeOpacity: 0.0,
+        });
+        circle.bindTo('center', marker, 'position');
+      }
+    }
+  }
+
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLt-amMPE_W2ldZPbconEltNeocb_UhcU&">
+</script>
+{% endblock %}
