@@ -8,7 +8,7 @@ Creators:
 - [Mark Hellwig](https://github.com/Merkastrophe)
 - [Joshua Neela](https://github.com/DrSamosa)
 
-A web application calculating the carbon death clock. GAIA allows anyone to see their community's Carbon footprint and see how their footprint can change.
+A web application calculating the carbon death clock. Terra allows anyone to see their community's Carbon footprint and see how their footprint can change.
 
 [Github Repo](https://github.com/jshepin/Terra), [Hosted Website](https://bit.ly/2UV2tzL)
 ![lights](static/ledLights.jpg "Lights")
